@@ -4,10 +4,12 @@ import org.example.model.CookieMap;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class MostActiveCookieService {
 
     private final CookieMap cookieMap;
+    private static final Logger logger = Logger.getLogger(MostActiveCookieService.class.getName());
 
     public MostActiveCookieService(CookieMap cookieMap) {
         this.cookieMap = cookieMap;
@@ -39,6 +41,7 @@ public class MostActiveCookieService {
             }
         }
 
+        logger.info("Found " + mostActiveCookies.size() + " most active cookie(s) for date " + date);
         return mostActiveCookies;
     }
 }

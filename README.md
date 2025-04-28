@@ -64,7 +64,8 @@ Ensure Maven is installed and Java 11 is available.
 Along with the project, several example cookie log files are provided for testing:
 
 File Name | Description
-cookie_log.csv | The original provided sample log file
-cookieFile_multipleActiveCookies.csv | Contains multiple cookies tied as most active
-cookieFile_singleWinner.csv | Contains a single most active cookie
-cookieFile_noCookie.csv | No matching cookies for the test date
+|cookie_log.csv | The original provided sample log file
+|cookieFile_multipleActiveCookies.csv | Contains multiple cookies tied as most active
+|cookieFile_singleWinner.csv | Contains a single most active cookie
+|cookieFile_noCookie.csv | No matching cookies for the test date
+|cookieFile_1000CookiesTest | A thousand cookies with one cookie appearing 500 times and should be printed

@@ -6,10 +6,12 @@ import org.example.util.CookieFileParser;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Main {
-
+    private static final Logger logger = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
+
         if (args.length != 4) {
             printUsageAndExit();
         }
@@ -38,6 +40,8 @@ public class Main {
 
             // Parse the file
             CookieMap cookieMap = CookieFileParser.parseFile(filePath);
+            logger.info("Parsing file: " + filePath);
+            logger.info("Searching for cookies on date: " + targetDate);
 
             // Find the most active cookies
             MostActiveCookieService service = new MostActiveCookieService(cookieMap);

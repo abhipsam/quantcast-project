@@ -17,4 +17,8 @@ public class CookieMap {
     public List<String> getCookiesForDate(LocalDate date) {
         return dateCookieMap.getOrDefault(date, Collections.emptyList());
     }
+
+    public Map<LocalDate, List<String>> getDateCookieMap() {
+        return dateCookieMap;
+    }
 }

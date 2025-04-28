@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 public class CookieFileParser {
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+    private static final Logger logger = Logger.getLogger(CookieFileParser.class.getName());
 
     public static CookieMap parseFile(String filePath)  {
         CookieMap cookieMap = new CookieMap();
@@ -33,6 +33,7 @@ public class CookieFileParser {
                 LocalDate date = LocalDate.parse(timestampStr.substring(0, 10));
 
                 cookieMap.addCookie(date, cookie);
+                logger.info("Finished parsing file. Total dates loaded: " + cookieMap.getDateCookieMap().size());
             }
         } catch (IOException e) {
 

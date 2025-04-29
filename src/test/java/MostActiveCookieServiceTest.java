@@ -13,7 +13,7 @@ class MostActiveCookieServiceTest {
 
     @Test
     void testOriginalSampleFile() throws IOException {
-        CookieMap cookieMap = CookieFileParser.parseFile("src/main/resources/cookieFile.csv");
+        CookieMap cookieMap = CookieFileParser.parseFile("cookieFile.csv");
         MostActiveCookieService service = new MostActiveCookieService(cookieMap);
 
         List<String> result = service.getMostActiveCookies(LocalDate.of(2018, 12, 9));
@@ -24,7 +24,7 @@ class MostActiveCookieServiceTest {
 
     @Test
     void testMultipleActiveCookies() throws IOException {
-        CookieMap cookieMap = CookieFileParser.parseFile("src/main/resources/cookieFile_multipleActiveCookies.csv");
+        CookieMap cookieMap = CookieFileParser.parseFile("cookieFile_multipleActiveCookies.csv");
         MostActiveCookieService service = new MostActiveCookieService(cookieMap);
 
         List<String> result = service.getMostActiveCookies(LocalDate.of(2018, 12, 10));
@@ -36,7 +36,7 @@ class MostActiveCookieServiceTest {
 
     @Test
     void testSingleWinnerCookie() throws IOException {
-        CookieMap cookieMap = CookieFileParser.parseFile("src/main/resources/cookieFile_singleWinner.csv");
+        CookieMap cookieMap = CookieFileParser.parseFile("cookieFile_singleWinner.csv");
         MostActiveCookieService service = new MostActiveCookieService(cookieMap);
 
         List<String> result = service.getMostActiveCookies(LocalDate.of(2018, 12, 12));
@@ -47,7 +47,7 @@ class MostActiveCookieServiceTest {
 
     @Test
     void testNoCookiesFound() throws IOException {
-        CookieMap cookieMap = CookieFileParser.parseFile("src/main/resources/cookieFile_noCookie.csv");
+        CookieMap cookieMap = CookieFileParser.parseFile("cookieFile_noCookie.csv");
         MostActiveCookieService service = new MostActiveCookieService(cookieMap);
 
         List<String> result = service.getMostActiveCookies(LocalDate.of(2018, 12, 9));
@@ -57,7 +57,7 @@ class MostActiveCookieServiceTest {
 
     @Test
     void testStressTestLargeFile() throws IOException {
-        CookieMap cookieMap = CookieFileParser.parseFile("src/main/resources/cookieFile_1000CookiesTest.csv");
+        CookieMap cookieMap = CookieFileParser.parseFile("cookieFile_1000CookiesTest.csv");
         MostActiveCookieService service = new MostActiveCookieService(cookieMap);
 
         List<String> result = service.getMostActiveCookies(LocalDate.of(2018, 12,9));

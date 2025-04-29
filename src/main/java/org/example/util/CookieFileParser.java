@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 public class CookieFileParser {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
     private static final Logger logger = Logger.getLogger(CookieFileParser.class.getName());
 
     public static CookieMap parseFile(String filePath)  {

@@ -1,71 +1,151 @@
+
 # Most Active Cookie - Quantcast Coding Challenge
 
 ## Overview
 
 This project is a Java command-line application that processes a cookie log file and returns the most active cookie(s) for a specified date.
 
-- **Language:** Java 11
-- **Build Tool:** Maven
-- **Testing Framework:** JUnit 5
-- **Containerization:** Docker
+- **Language:** Java 11  
+- **Build Tool:** Maven  
+- **Testing Framework:** JUnit 5  
+- **Containerization:** Docker (optional)
 
 The application reads a CSV log file containing cookies and their timestamps, identifies the cookie(s) that appear most frequently on a given day, and outputs the result(s) to standard output.
 
 ---
 
-## Project Structure
-/src/main/java Main.java CookieFileParser.java CookieMap.java MostActiveCookieService.java
+## 📁 Project Structure
 
-/src/test/java MostActiveCookieServiceTest.java
+```
+/src/main/java
+    org.example.Main
+    util.CookieFileParser
+    model.CookieMap
+    service.MostActiveCookieService
 
-Dockerfile pom.xml README.md
+/src/test/java
+    service.MostActiveCookieServiceTest
 
+Dockerfile
+pom.xml
+README.md
+most-active-cookie (CLI wrapper script)
+
+cookieFile.csv
+cookieFile_multipleActiveCookies.csv
+cookieFile_singleWinner.csv
+cookieFile_noCookie.csv
+cookieFile_1000CookiesTest.csv
+```
 
 ---
 
-## Build Instructions
+## 🧱 Build Instructions (Local)
 
-Make sure you have Docker installed.
-
-To build the project inside a Docker image:
-
-Run Instructions
-Run the application using Docker by mounting the cookie log file:
+To compile and package the project:
 
 ```bash
-docker run -v $(pwd)/cookie_log.csv:/app/cookie_log.csv most-active-cookie -f cookie_log.csv -d <yyyy-MM-dd>
+mvn clean package
 ```
 
-## Assumptions
-The input CSV file has a header (cookie,timestamp).
-Timestamps are in ISO 8601 format and in UTC.
-The cookie log is sorted by timestamp in descending order (most recent first).
-The application expects exact file path mounting using Docker volumes.
-The application processes the entire file but only counts cookies for the given date.
-If no cookies are found for the specified date, an appropriate message is shown.
+This creates the executable `.jar`:
 
-## Testing
-Unit tests are provided for the core business logic (MostActiveCookieService) using JUnit 5.
+```
+target/QuantcastProj-1.0-SNAPSHOT.jar
+```
 
-To run tests locally (without Docker):
+---
+
+## 🚀 CLI Usage
+
+You can run the project using the included CLI script:
+
+```bash
+./most-active-cookie -f <filename.csv> -d <yyyy-MM-dd>
+```
+
+### Example:
+
+```bash
+./most-active-cookie -f cookieFile.csv -d 2018-12-09
+```
+
+### ✅ Before running:
+
+Make sure the file `most-active-cookie` is executable:
+
+```bash
+chmod +x most-active-cookie
+```
+
+The CSV file should be in the **root directory** (same level as the script).
+
+---
+
+## 🐳 Docker Instructions (Alternative)
+
+To build the Docker image:
+
+```bash
+docker build -t most-active-cookie .
+```
+
+To run:
+
+```bash
+docker run -v $(pwd)/cookieFile.csv:/app/cookie_log.csv most-active-cookie -f cookie_log.csv -d 2018-12-09
+```
+
+---
+
+## 🧪 Testing
+
+To run unit tests:
+
 ```bash
 mvn clean test
 ```
 
-## Running Locally (Optional)
-If you prefer to run the application directly without Docker:
+Tests are written using JUnit 5 for the `MostActiveCookieService` class.
+
+---
+
+## 🔬 Assumptions
+
+- Input CSV file has a header: `cookie,timestamp`
+- Timestamps are in ISO 8601 format and UTC timezone
+- The log is sorted by timestamp (most recent first)
+- Only cookies from the specified date are counted
+- If no cookies match the date, a message is printed
+
+---
+
+## 📂 Example Input Files
+
+These test files are included in the root directory:
+
+| File Name                         | Description                                                                 |
+|----------------------------------|-----------------------------------------------------------------------------|
+| `cookieFile.csv`                 | Original sample file                                                        |
+| `cookieFile_multipleActiveCookies.csv` | Contains multiple cookies tied as most active                          |
+| `cookieFile_singleWinner.csv`    | Contains a single most active cookie                                        |
+| `cookieFile_noCookie.csv`        | No cookies for the test date                                                |
+| `cookieFile_1000CookiesTest.csv` | Large test file: 1000 cookies, one appearing 500 times as the clear winner |
+
+To test any file:
+
 ```bash
-mvn clean compile exec:java -Dexec.mainClass="org.example.Main" -Dexec.args="-f cookie_log.csv -d 2018-12-09"
+./most-active-cookie -f cookieFile_multipleActiveCookies.csv -d 2018-12-10
 ```
 
-Ensure Maven is installed and Java 11 is available.
+---
 
-## Example Input Files
-Along with the project, several example cookie log files are provided for testing:
+## ✅ Ready for Submission
 
-File Name | Description
-|cookie_log.csv | The original provided sample log file
-|cookieFile_multipleActiveCookies.csv | Contains multiple cookies tied as most active
-|cookieFile_singleWinner.csv | Contains a single most active cookie
-|cookieFile_noCookie.csv | No matching cookies for the test date
-|cookieFile_1000CookiesTest | A thousand cookies with one cookie appearing 500 times and should be printed
+This project matches all assignment requirements and includes:
+
+- CLI support via `./most-active-cookie`
+- Docker support
+- Unit tests
+- Example input files
+- Clean and maintainable code structure
